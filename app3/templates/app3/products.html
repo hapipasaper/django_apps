@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Product List</title>
+  <link rel="stylesheet" href="{% static 'app3/css/style.css' %}">
+</head>
+<body>
+  <div class="products-container">
+    <h1>Our Products</h1>
+    <ul>
+      {% for product in products %}
+        <li>
+          <strong>{{ product.name }}</strong> - 
+          ${{ product.price|floatformat:2 }}
+          {% if product.available %}
+            <span class="available">(Available)</span>
+          {% else %}
+            <span class="unavailable">(Out of Stock)</span>
+          {% endif %}
+        </li>
+      {% empty %}
+        <li>No products available.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
+

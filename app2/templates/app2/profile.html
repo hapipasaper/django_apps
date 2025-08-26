@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="{% static 'app2/css/style.css' %}">
+</head>
+<body>
+  <div class="profile-container">
+    <h1>User Profile</h1>
+    <p><strong>Name:</strong> {{ user.name|title }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Age:</strong> {{ user.age }}</p>
+
+    <h3>Skills (Total: {{ user.skills|length }})</h3>
+    <ul>
+      {% for skill in user.skills %}
+        <li>{{ skill|title }}</li>
+      {% empty %}
+        <li>No skills listed</li>
+      {% endfor %}
+    </ul>
+
+    {% if user.age >= 18 %}
+      <p>Status: Adult</p>
+    {% else %}
+      <p>Status: Minor</p>
+    {% endif %}
+  </div>
+</body>
+</html>
